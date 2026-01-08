@@ -1,25 +1,26 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
-  Button,
   Container,
+  Grid,
   CssBaseline,
   Dialog,
-  DialogActions,
+  DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogTitle,
-  Grid,
+  DialogActions,
+  Button
 } from '@mui/material';
 import Header from './components/Header';
-import { User } from './types';
 import LeftSidebar from './components/LeftSidebar';
+import Feed from './components/Feed';
+import { User } from './types';
 
 const currentUser: User = {
   id: 'me',
   name: 'Mohd Aman',
-  headline: 'Advanced Next.js Engineer | TypeScript | React | Tailwind CSS | Material UI',
+  headline: 'Senior Frontend Engineer | React & TypeScript Expert',
   avatar: '',
   connections: 542,
   profileViews: 128
@@ -57,11 +58,22 @@ const App: React.FC = () => {
 
       <Container maxWidth="lg" sx={{ py: 3 }}>
         <Grid container spacing={3}>
+
           {/* Left Column: Sticky Container */}
           <Grid item xs={false} md={4} lg={3} sx={{ display: { xs: 'none', md: 'block' } }}>
             <Box sx={{ position: 'sticky', top: 80 }}>
               <LeftSidebar user={currentUser} onFeatureClick={handleOpenFeatureModal} isLoading={isLoading} />
             </Box>
+          </Grid>
+
+          {/* This is feed post  */}
+          <Grid item xs={12} md={8} lg={6}>
+            <Feed
+              currentUser={currentUser}
+              searchQuery={searchQuery}
+              onFeatureClick={handleOpenFeatureModal}
+              isLoading={isLoading}
+            />
           </Grid>
         </Grid>
       </Container>
